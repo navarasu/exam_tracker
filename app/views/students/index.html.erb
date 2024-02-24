@@ -49,11 +49,11 @@
               <%= student.age %>
             </td>
             <td>
-              <%= student.gender %>
+              <%= student.gender.humanize %>
             </td>
-            <td> BCA
+            <td> <%= student.department.name %>
             </td>
-            <td> 2021 - 2024
+            <td> <%= student.batch.name %>
             </td>
             <td>
               <%= link_to raw('<i class="bi bi-pencil-fill"></i>'),edit_student_path(student), class:"btn btn-sm btn-outline-gray-800", data: {turbo: true, turbo_frame: "modal"} %>

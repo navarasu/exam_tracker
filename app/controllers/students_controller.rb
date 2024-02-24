@@ -8,6 +8,13 @@ class StudentsController < ApplicationController
 
   def new
     @student = Student.new
+    @departments = Department.all
+    @batches = Batch.all
+  end
+
+  def edit
+    @departments = Department.all
+    @batches = Batch.all
   end
 
   def create
@@ -43,6 +50,6 @@ class StudentsController < ApplicationController
   end
 
   def student_params
-    params.require(:student).permit(:name, :gender, :age)
+    params.require(:student).permit(:name, :gender, :age, :department_id, :batch_id)
   end
 end

@@ -7,10 +7,10 @@
       </div>
       <div class= 'col-6'>
         <%= f.label :name, "Reg. No" %>
-        <%= f.text_field :name ,placeholder: "Enter student's Reg No",class:"form-control" %>
+        <%= f.text_field :reg_no ,placeholder: "Enter student's Reg No",class:"form-control" %>
       </div>
     </div>
-    <div class='row'>
+    <div class='row mb-4'>
       <div class= 'col-6'>
         <fieldset>
           <legend class="h6">Gender</legend>
@@ -29,6 +29,17 @@
         <%= f.text_field :age ,placeholder: "Enter student's Reg No",class:"form-control" %>
       </div>
     </div>
+    <div class='row mb-4'>
+      <div class= 'col-6'>
+        <%= f.label :department_id, 'Department', class: 'my-1 me-2' %>
+        <%= f.select :department_id, options_from_collection_for_select(@departments, 'id', 'name'), {include_blank: true}, class: 'form-select' %>
+      </div>
+      <div class= 'col-6'>
+        <%= f.label :batch_id, 'Batch', class: 'my-1 me-2' %>
+        <%= f.select :batch_id, options_from_collection_for_select(@batches, 'id', 'name'), {include_blank: true}, class: 'form-select' %>
+      </div>
+    </div>
+
   </div>
 <div class="modal-footer">
   <%= f.submit "Save student", class:"btn btn-secondary" %>

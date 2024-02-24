@@ -10,9 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_24_141840) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_24_192142) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "batches", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_batches_on_name", unique: true
+  end
+
+  create_table "departments", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_departments_on_name", unique: true
+  end
 
   create_table "students", force: :cascade do |t|
     t.string "name"
@@ -20,6 +34,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_24_141840) do
     t.integer "age"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "department_id", null: false
+    t.bigint "batch_id", null: false
+    t.string "reg_no"
+    t.index ["batch_id"], name: "index_students_on_batch_id"
+    t.index ["department_id"], name: "index_students_on_department_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -36,4 +55,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_24_141840) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "students", "batches"
+  add_foreign_key "students", "departments"
 end
