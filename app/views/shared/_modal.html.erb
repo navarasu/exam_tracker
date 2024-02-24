@@ -1,0 +1,17 @@
+<%
+  closable ||= false
+  fade_in ||= false
+%>
+<%= turbo_frame_tag "modal" do %>
+  <div class="modal <%= fade_in ? "fade" : ""%>" tabindex="-1" data-controller="modal" id="<%= closable ? "closable" : ""%>">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="h6 modal-title"><%= title %></h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+<% end %>

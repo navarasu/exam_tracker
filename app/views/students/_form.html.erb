@@ -1,0 +1,37 @@
+<%= form_with model: @student do |f| %>
+  <div class="modal-body px-5 py-4">
+    <div class='row mb-4'>
+      <div class= 'col-6'>
+        <%= f.label :name, "Name" %>
+        <%= f.text_field :name ,placeholder: "Enter student's Name",class:"form-control" %>
+      </div>
+      <div class= 'col-6'>
+        <%= f.label :name, "Reg. No" %>
+        <%= f.text_field :name ,placeholder: "Enter student's Reg No",class:"form-control" %>
+      </div>
+    </div>
+    <div class='row'>
+      <div class= 'col-6'>
+        <fieldset>
+          <legend class="h6">Gender</legend>
+          <div class="form-check">
+            <%= f.radio_button :gender, "male", class: 'form-check-input'%>
+            <%= f.label :gender, "Male", class: 'form-check-label' %>
+          </div>
+          <div class="form-check">
+            <%= f.radio_button :gender, "female", class: 'form-check-input'%>
+            <%= f.label :gender, "Female", class: 'form-check-label' %>
+          </div>
+        </fieldset>
+      </div>
+      <div class= 'col-6'>
+        <%= f.label :name, "Age" %>
+        <%= f.text_field :age ,placeholder: "Enter student's Reg No",class:"form-control" %>
+      </div>
+    </div>
+  </div>
+<div class="modal-footer">
+  <%= f.submit "Save student", class:"btn btn-secondary" %>
+  <button type="button" class="btn btn-link text-gray-600 ms-auto" data-bs-dismiss="modal">Close</button>
+</div>
+<% end %>
