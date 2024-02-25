@@ -1,2 +1,3 @@
-<h1>ExamSchedules#new</h1>
-<p>Find me in app/views/exam_schedules/new.html.erb</p>
+<%= render 'shared/modal', title: "Create New ExamSchedule", fade_in: true do %>
+  <%= render 'form', exam_schedule: @exam_schedule %>
+<% end %>

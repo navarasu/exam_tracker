@@ -1,0 +1,2 @@
+module AttendanceStudentsHelper
+end

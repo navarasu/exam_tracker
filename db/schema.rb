@@ -10,9 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_25_054912) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_25_120923) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attendance_students", force: :cascade do |t|
+    t.bigint "attendance_id", null: false
+    t.bigint "student_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["attendance_id"], name: "index_attendance_students_on_attendance_id"
+    t.index ["student_id"], name: "index_attendance_students_on_student_id"
+  end
+
+  create_table "attendances", force: :cascade do |t|
+    t.bigint "created_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "exam_schedule_id", null: false
+    t.index ["created_by_id"], name: "index_attendances_on_created_by_id"
+    t.index ["exam_schedule_id"], name: "index_attendances_on_exam_schedule_id", unique: true
+  end
 
   create_table "batches", force: :cascade do |t|
     t.string "name", null: false
@@ -83,6 +101,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_25_054912) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "attendance_students", "attendances"
+  add_foreign_key "attendance_students", "students"
+  add_foreign_key "attendances", "exam_schedules"
+  add_foreign_key "attendances", "users", column: "created_by_id"
   add_foreign_key "exam_schedules", "batches"
   add_foreign_key "exam_schedules", "departments"
   add_foreign_key "exam_schedules", "exam_halls"

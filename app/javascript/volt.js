@@ -114,7 +114,20 @@ d.addEventListener("DOMContentLoaded", function(event) {
     var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
       return new bootstrap.Popover(popoverTriggerEl)
     })
-    
+  
+
+  window.changeText = function(element){
+    let label = element.nextElementSibling
+    if(element.checked) {
+    label.classList.remove('text-danger')
+      label.classList.add('text-sucesss')
+      label.innerHTML= 'Present'
+    }else {
+    label.classList.remove('text-sucesss')
+      label.classList.add('text-danger')
+      element.nextElementSibling.innerHTML= 'Absent'
+    }
+  }
 
     // Datepicker
     var datepickers = [].slice.call(d.querySelectorAll('[data-datepicker]'))

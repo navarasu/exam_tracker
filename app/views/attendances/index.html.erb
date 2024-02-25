@@ -1,43 +1,135 @@
-<h2 class="h4">Attendance</h2>
-<p class="mb-0">Your web analytics dashboard template.</p>
-<div class="card card-body border-0 shadow table-wrapper table-responsive">
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th class="border-gray-200">Reg No</th>
-        <th class="border-gray-200">Student Name</th>						
-        <th class="border-gray-200">Age</th>
-        <th class="border-gray-200">Gender</th>
-        <th class="border-gray-200">Batch</th>
-        <th class="border-gray-200">Department</th>
-        <th class="border-gray-200">Attendance</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @students.each do |student| %>
-      <tr>
-        <td>
-          <a href="#" class="fw-bold">
-            <%= student.id %>
-          </a>
-        </td>
-        <td>
-          <span class="fw-normal"><%= student.name %></span>
-        </td>
-        <td><span class="fw-normal"><%= student.age %></span></td>                        
-        <td><span class="fw-normal"><%= student.gender.humanize %></span></td>                        
-        <td><span class="fw-normal">2021 - 2024</span></td>                        
-        <td><span class="fw-normal">BCA</span></td>                        
-        <td>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="user-notification-1">
-            <label class="form-check-label" for="user-notification-1"></label>
-            <span class="fw-bold text-success">Present</span></td>
-          </div>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
-  <div class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
+<div class="py-4">
+  <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+    <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+      <li class="breadcrumb-item">
+        <a href="#">
+          <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+        </a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Attendance</li>
+    </ol>
+  </nav>
+  <div class="d-flex justify-content-between w-100 flex-wrap">
+    <div class="mb-3 mb-lg-0">
+      <h1 class="h4">Attendance</h1>
+      <p class="mb-0">Attendance for the Exam schedules</p>
+    </div>
+    <div>
+      <div class="col mb-3">
+        <%= label_tag :date, "Exam Date" %>
+        <div class="input-group">
+          <span class="input-group-text">
+            <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+          </span>
+          <%= text_field_tag :date , Time.current.strftime("%d/%m/%Y"),class: "form-control datepicker-input", placeholder: 'dd/mm/yyyy', required: true %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+<h4> Pending</h4>
+<div class="card border-0 shadow mb-4">
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-centered table-nowrap mb-0 rounded">
+        <thead class="thead-light">
+          <tr>
+            <th class="border-0 rounded-start">Date</th>
+            <th class="border-0">Exam Hall</th>
+            <th class="border-0">Batch</th>
+            <th class="border-0">Department</th>
+            <th class="border-0">Subject</th>
+            <th class="border-0 rounded-end">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @exam_schedules_pending.blank? %>
+            <tr>
+              <td colspan='6'>
+              No pending attendance
+              </td>
+              </tr>
+        <% end %>
+        <% @exam_schedules_pending.each do |exam_schedule| %>
+          <tr>
+            <td>
+              <%= link_to exam_schedule.date.strftime("%d/%m/%Y") , exam_schedule_path(exam_schedule), class: "text-primary fw-bold" %>
+            </td>
+            <td>
+              <%= exam_schedule.exam_hall.no %>
+            </td>
+            <td>
+              <%= exam_schedule.batch.name %>
+            </td>
+            <td>
+              <%= exam_schedule.department.name %>
+            </td>
+            <td> <%= exam_schedule.subject.name %> </td>
+            <td>
+              <% if exam_schedule.attendance.present? %>
+              <%= link_to raw('<i class="bi bi-arrow-right-circle-fill"></i>'),attendance_path(exam_schedule.attendance), class:"btn btn-sm btn-outline-gray-800" %>
+            <% else %>
+              <%= link_to 'Record',new_attendance_path(exam_schedule_id: exam_schedule.id), class:"btn btn-sm btn-outline-gray-800" %>
+            <% end %>
+          </tr>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<h4>Recorded</h4>
+<div class="card border-0 shadow mb-4">
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-centered table-nowrap mb-0 rounded">
+        <thead class="thead-light">
+          <tr>
+            <th class="border-0 rounded-start">Date</th>
+            <th class="border-0">Exam Hall</th>
+            <th class="border-0">Batch</th>
+            <th class="border-0">Department</th>
+            <th class="border-0">Subject</th>
+            <th class="border-0">Attendance</th>
+            <th class="border-0 rounded-end">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @exam_schedules_completed.each do |exam_schedule| %>
+          <tr>
+            <td>
+              <%= link_to exam_schedule.date.strftime("%d/%m/%Y") , exam_schedule_path(exam_schedule), class: "text-primary fw-bold" %>
+            </td>
+            <td>
+              <%= exam_schedule.exam_hall.no %>
+            </td>
+            <td>
+              <%= exam_schedule.batch.name %>
+            </td>
+            <td>
+              <%= exam_schedule.department.name %>
+            </td>
+            <% total_count = Student.where(exam_schedule.as_json.slice('batch_id','department_id')).count %>
+            <% present_count =  exam_schedule.attendance.students.count %>
+            <td> <%= exam_schedule.subject.name %> </td>
+            <td> 
+              <%= ((present_count/3.to_f)*100).round %> %
+            </td>
+            <td>
+              <% if exam_schedule.attendance.present? %>
+              <%= link_to raw('<i class="bi bi-arrow-right-circle-fill"></i>'),attendance_path(exam_schedule.attendance), class:"btn btn-sm btn-outline-gray-800" %>
+            <% else %>
+              <%= link_to 'Record',new_attendance_path(exam_schedule_id: exam_schedule.id), class:"btn btn-sm btn-outline-gray-800" %>
+            <% end %>
+          </tr>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

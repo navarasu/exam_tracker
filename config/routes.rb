@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :attendance_students
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -21,8 +22,7 @@ Rails.application.routes.draw do
   resources :batches
   resources :departments
   resources :subjects
-
-  get 'attendances/index'
+  resources :attendances
 
   get 'home/index'
   get 'home/welcome'

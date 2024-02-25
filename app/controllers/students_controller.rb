@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
 
-  before_action :set_student_params, only: %i[show edit update destroy]
+  before_action :set_student_params, only: %i[edit update destroy]
 
   def index
     @students = Student.all
@@ -18,7 +18,7 @@ class StudentsController < ApplicationController
   end
 
   def create
-    @student = Student.create(student_params)
+    @student = Student.new(student_params)
     if @student.save
       redirect_to students_url, notice: 'Student was successfully created.'
     else

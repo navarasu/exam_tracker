@@ -1,0 +1,48 @@
+<%= form_with model: exam_schedule do |f| %>
+  <div class="modal-body px-5 py-4">
+      <% if exam_schedule.errors.any? %>
+    <div style="color: red">
+      <ul>
+        <% exam_schedule.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <div class='row mb-4'>
+      <div class="col-6 mb-3">
+        <%= f.label :date, "Exam Date" %>
+        <div class="input-group">
+          <span class="input-group-text">
+            <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+          </span>
+          <%= f.text_field :date ,class: "form-control datepicker-input", placeholder: 'dd/mm/yyyy', required: true, value: exam_schedule.date&.strftime("%d/%m/%Y") %>
+        </div>
+      </div>
+      <div class= 'col-6'>
+        <%= f.label :exam_hall_id, 'Exam Hall', class: 'my-1 me-2' %>
+        <%= f.select :exam_hall_id, options_from_collection_for_select(ExamHall.all, 'id', 'no', exam_schedule.exam_hall_id), {include_blank: true}, class: 'form-select' %>
+      </div>
+    </div>
+    <div class='row mb-4'>
+      <div class= 'col-6'>
+        <%= f.label :department_id, 'Department', class: 'my-1 me-2' %>
+        <%= f.select :department_id, options_from_collection_for_select(Department.all, 'id', 'name', exam_schedule.department_id), {include_blank: true}, class: 'form-select' %>
+      </div>
+      <div class= 'col-6'>
+        <%= f.label :batch_id, 'Batch', class: 'my-1 me-2' %>
+        <%= f.select :batch_id, options_from_collection_for_select(Batch.all, 'id', 'name', exam_schedule.batch_id), {include_blank: true}, class: 'form-select' %>
+      </div>
+    </div>
+    <div class='row mb-4'>
+      <div class= 'col-6'>
+        <%= f.label :subject_id, 'Subject', class: 'my-1 me-2' %>
+        <%= f.select :subject_id, options_from_collection_for_select(Subject.all, 'id', 'name', exam_schedule.subject_id), {include_blank: true}, class: 'form-select' %>
+      </div>
+    </div>
+  </div>
+<div class="modal-footer">
+  <%= f.submit "Save Schedule", class:"btn btn-secondary" %>
+  <button type="button" class="btn btn-link text-gray-600 ms-auto" data-bs-dismiss="modal">Close</button>
+</div>
+<% end %>

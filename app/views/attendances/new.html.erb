@@ -1,0 +1,73 @@
+  <h2 class="h5 m-4">Attendance Detail</h2>
+
+<div class="card card-body border-0 shadow m-3 bg-yellow-100">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item d-flex align-items-center justify-content-between px-0 bg-yellow-100">
+      <div class='col'>
+        <p class="small pe-3"> Exam Date</h3>
+        <h3 class="h6"><%= @exam_schedule.date.strftime("%d/%m/%Y")  %></p>
+      </div>
+      <div class='col'>
+        <p class="small pe-3"> Exam Hall</h3>
+        <h3 class="h6"><%= @exam_schedule.exam_hall.no  %></p>
+      </div>
+      <div class='col'>
+        <p class="small pe-3"> Batch </h3>
+        <h3 class="h6"><%= @exam_schedule.batch.name  %></p>
+      </div>
+      <div class='col'>
+        <p class="small pe-3"> Department</h3>
+        <h3 class="h6"><%= @exam_schedule.department.name  %></p>
+      </div>
+      <div class='col'>
+        <p class="small pe-3"> Subject</h3>
+        <h3 class="h6"><%= @exam_schedule.subject.name  %></p>
+      </div>
+    </li>
+  </ul>
+</div>
+<div class="card card-body border-0 shadow table-wrapper table-responsive">
+  <%= form_with model: @attendance do |f| %>
+  <%= f.hidden_field :exam_schedule_id %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th class="border-gray-200">Reg No</th>
+        <th class="border-gray-200">Student Name</th>						
+        <th class="border-gray-200">Age</th>
+        <th class="border-gray-200">Gender</th>
+        <th class="border-gray-200">Batch</th>
+        <th class="border-gray-200">Department</th>
+        <th class="border-gray-200">Attendance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @students.each do |student| %>
+      <tr>
+        <td>
+          <a href="#" class="fw-bold">
+            <%= student.id %>
+          </a>
+        </td>
+        <td>
+          <span class="fw-normal"><%= student.name %></span>
+        </td>
+        <td><span class="fw-normal"><%= student.age %></span></td>                        
+        <td><span class="fw-normal"><%= student.gender.humanize %></span></td>                        
+        <td><span class="fw-normal"><%= student.batch.name %></span></td>                        
+        <td><span class="fw-normal"><%= student.department.name %></span></td>                        
+        <td>
+          <div class="form-check form-switch">
+            <%= f.check_box :student_ids, {multiple: true, class: 'form-check-input',   onchange: 'changeText(this)', checked: true }, student.id, nil %>
+            <%= f.label :student_ids, "Present", class: 'form-check-label text-success' %>
+          </div>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <div class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
+    <div></div>
+    <%=f.submit "Record Attendance", class: 'btn btn-sm btn-secondary' %>
+  </div>
+<% end %>
+</div>

@@ -10,7 +10,9 @@
           <h2 class="h6 modal-title"><%= title %></h2>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <%= yield %>
+        <div id='remote_modal_body'>
+          <%= yield %>
+        </div>
       </div>
     </div>
   </div>
