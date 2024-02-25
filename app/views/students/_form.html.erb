@@ -1,4 +1,4 @@
-<%= form_with model: @student do |f| %>
+<%= form_with model: student do |f| %>
   <div class="modal-body px-5 py-4">
     <div class='row mb-4'>
       <div class= 'col-6'>
@@ -32,11 +32,11 @@
     <div class='row mb-4'>
       <div class= 'col-6'>
         <%= f.label :department_id, 'Department', class: 'my-1 me-2' %>
-        <%= f.select :department_id, options_from_collection_for_select(@departments, 'id', 'name'), {include_blank: true}, class: 'form-select' %>
+        <%= f.select :department_id, options_from_collection_for_select(@departments, 'id', 'name', student.department_id), {include_blank: true}, class: 'form-select' %>
       </div>
       <div class= 'col-6'>
         <%= f.label :batch_id, 'Batch', class: 'my-1 me-2' %>
-        <%= f.select :batch_id, options_from_collection_for_select(@batches, 'id', 'name'), {include_blank: true}, class: 'form-select' %>
+        <%= f.select :batch_id, options_from_collection_for_select(@batches, 'id', 'name',student.batch_id), {include_blank: true}, class: 'form-select' %>
       </div>
     </div>
 

@@ -40,7 +40,7 @@
         <% @students.each do |student| %>
           <tr>
             <td>
-              <%= link_to student.id, student_path(student), class: "text-primary fw-bold" %>
+              <%= link_to student.reg_no, student_path(student), class: "text-primary fw-bold" %>
             </td>
             <td>
               <%= student.name %>

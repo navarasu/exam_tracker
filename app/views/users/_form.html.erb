@@ -1,0 +1,31 @@
+<%= form_with model: user do |f| %>
+  <div class="modal-body px-5 py-4">
+    <div class='row mb-4'>
+      <div class= 'col-6'>
+        <%= f.label :name, "Name" %>
+        <%= f.text_field :name ,placeholder: "Enter User's Name",class:"form-control" %>
+      </div>
+      <div class= 'col-6'>
+        <%= f.label :role, "Role" %>
+        <%= user.role %>
+        <%= f.select :role,  options_for_select(User.roles.keys.map { |value| value.capitalize}, user.role.capitalize), {include_blank: true}, class: 'form-select' %>
+      </div>
+    </div>
+    <% if user.new_record? %>
+    <div class='row mb-4'>
+      <div class= 'col-6'>
+        <%= f.label :username, "User Name" %>
+        <%= f.text_field :username ,placeholder: "Enter UserName",class:"form-control" %>
+      </div>
+      <div class= 'col-6'>
+        <%= f.label :password, "Password" %>
+        <%= f.text_field :password ,placeholder: "Enter Password",class:"form-control" %>
+      </div>
+    </div>
+  <% end %>
+  </div>
+<div class="modal-footer">
+  <%= f.submit "Save user", class:"btn btn-secondary" %>
+  <button type="button" class="btn btn-link text-gray-600 ms-auto" data-bs-dismiss="modal">Close</button>
+</div>
+<% end %>
