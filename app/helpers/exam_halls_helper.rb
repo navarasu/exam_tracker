@@ -1,0 +1,2 @@
+module ExamHallsHelper
+end

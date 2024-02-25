@@ -16,6 +16,12 @@ Rails.application.routes.draw do
   end
   resources :students
   resources :users
+  resources :exam_schedules
+  resources :exam_halls
+  resources :batches
+  resources :departments
+  resources :subjects
+
   get 'attendances/index'
 
   get 'home/index'

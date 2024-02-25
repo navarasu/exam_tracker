@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_24_192142) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_25_054912) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,6 +28,27 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_24_192142) do
     t.index ["name"], name: "index_departments_on_name", unique: true
   end
 
+  create_table "exam_halls", force: :cascade do |t|
+    t.string "no", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["no"], name: "index_exam_halls_on_no", unique: true
+  end
+
+  create_table "exam_schedules", force: :cascade do |t|
+    t.datetime "date", precision: nil
+    t.bigint "exam_hall_id", null: false
+    t.bigint "batch_id", null: false
+    t.bigint "subject_id", null: false
+    t.bigint "department_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["batch_id"], name: "index_exam_schedules_on_batch_id"
+    t.index ["department_id"], name: "index_exam_schedules_on_department_id"
+    t.index ["exam_hall_id"], name: "index_exam_schedules_on_exam_hall_id"
+    t.index ["subject_id"], name: "index_exam_schedules_on_subject_id"
+  end
+
   create_table "students", force: :cascade do |t|
     t.string "name"
     t.integer "gender", limit: 2
@@ -39,6 +60,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_24_192142) do
     t.string "reg_no"
     t.index ["batch_id"], name: "index_students_on_batch_id"
     t.index ["department_id"], name: "index_students_on_department_id"
+  end
+
+  create_table "subjects", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -55,6 +83,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_24_192142) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "exam_schedules", "batches"
+  add_foreign_key "exam_schedules", "departments"
+  add_foreign_key "exam_schedules", "exam_halls"
+  add_foreign_key "exam_schedules", "subjects"
   add_foreign_key "students", "batches"
   add_foreign_key "students", "departments"
 end

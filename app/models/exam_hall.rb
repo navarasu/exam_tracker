@@ -1,0 +1,2 @@
+class ExamHall < ApplicationRecord
+end

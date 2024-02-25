@@ -48,7 +48,7 @@
       <li class="nav-item <%= active_class(students_path) %>">
         <%= link_to raw('<span class="sidebar-icon">
               <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
-            </span><span class="sidebar-text">Exam Schedule</span>'), attendances_index_path, class: 'nav-link' %>
+            </span><span class="sidebar-text">Exam Schedule</span>'), exam_schedules_path, class: 'nav-link' %>
       </li>
       <li role="separator" class="dropdown-divider border-gray-700"></li>
       <% if current_user.admin? %>
@@ -72,17 +72,17 @@
             <li class="nav-item <%= active_class(students_path) %>">
               <%= link_to raw('<span class="sidebar-text">Student</span>'), students_path, class: 'nav-link'  %>
             </li>
-            <li class="nav-item <%= active_class(users_path) %>">
-              <%= link_to raw('<span class="sidebar-text">Subject</span>'), users_path, class: 'nav-link'  %>
+            <li class="nav-item <%= active_class(subjects_path) %>">
+              <%= link_to raw('<span class="sidebar-text">Subject</span>'), subjects_path, class: 'nav-link'  %>
             </li>
-            <li class="nav-item <%= active_class(users_path) %>">
-              <%= link_to raw('<span class="sidebar-text">Department</span>'), users_path, class: 'nav-link'  %>
+            <li class="nav-item <%= active_class(departments_path) %>">
+              <%= link_to raw('<span class="sidebar-text">Department</span>'), departments_path, class: 'nav-link'  %>
             </li>
-            <li class="nav-item <%= active_class(users_path) %>">
-              <%= link_to raw('<span class="sidebar-text">Batch</span>'), users_path, class: 'nav-link'  %>
+            <li class="nav-item <%= active_class(batches_path) %>">
+              <%= link_to raw('<span class="sidebar-text">Batch</span>'), batches_path, class: 'nav-link'  %>
             </li>
-            <li class="nav-item <%= active_class(users_path) %>">
-              <%= link_to raw('<span class="sidebar-text">Exam Hall</span>'), users_path, class: 'nav-link'  %>
+            <li class="nav-item <%= active_class(exam_halls_path) %>">
+              <%= link_to raw('<span class="sidebar-text">Exam Hall</span>'), exam_halls_path, class: 'nav-link'  %>
             </li>
 
             <li class="nav-item <%= active_class(users_path) %>">
