@@ -1,7 +1,9 @@
 class AttendancesController < ApplicationController
 
   def index
-    @exam_schedules = ExamSchedule.left_joins(:attendance).includes(:attendance).where(date: Time.new.strftime('%d-%m-%Y'))
+    date = params[:date]
+    date ||= Time.new.strftime('%d-%m-%Y')
+    @exam_schedules = ExamSchedule.left_joins(:attendance).includes(:attendance).where(date: date)
     @exam_schedules_pending = @exam_schedules.select { |val| val.attendance.nil? }
     @exam_schedules_completed = @exam_schedules.select { |val| val.attendance.present? }
   end
@@ -27,6 +29,7 @@ class AttendancesController < ApplicationController
     @attendance = Attendance.find(params[:id])
     @exam_schedule = @attendance.exam_schedule
     @students = @attendance.students
+    @students_absent = Student.where(@exam_schedule.as_json.slice('batch_id', 'department_id')).where.not(id: @students.pluck(:id))
   end
 
   def attendance_params

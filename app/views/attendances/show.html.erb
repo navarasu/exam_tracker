@@ -59,6 +59,27 @@
           </div>
       </tr>
     <% end %>
+    <% @students_absent.each do |student| %>
+      <tr>
+        <td>
+          <a href="#" class="fw-bold">
+            <%= student.id %>
+          </a>
+        </td>
+        <td>
+          <span class="fw-normal"><%= student.name %></span>
+        </td>
+        <td><span class="fw-normal"><%= student.age %></span></td>                        
+        <td><span class="fw-normal"><%= student.gender.humanize %></span></td>                        
+        <td><span class="fw-normal">2021 - 2024</span></td>                        
+        <td><span class="fw-normal">BCA</span></td>                        
+        <td>
+          <div class="form-check form-switch">
+            <span class='form-check-label text-danger'>Absent</span>
+          </div>
+      </tr>
+    <% end %>
+
     </tbody>
   </table>
   <div class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
