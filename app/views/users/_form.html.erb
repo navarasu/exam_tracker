@@ -8,7 +8,7 @@
       <div class= 'col-6'>
         <%= f.label :role, "Role" %>
         <%= user.role %>
-        <%= f.select :role,  options_for_select(User.roles.keys.map { |value| value.capitalize}, user.role.capitalize), {include_blank: true}, class: 'form-select' %>
+        <%= f.select :role,  options_for_select(User.roles.keys.map { |value| value}, user.role), {include_blank: true}, class: 'form-select' %>
       </div>
     </div>
     <% if user.new_record? %>

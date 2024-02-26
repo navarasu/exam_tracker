@@ -1,0 +1,15 @@
+<%= form_with model: @exam_hall do |f| %>
+    <div class="modal-body px-5 py-4">
+      <div class='row mb-4'>
+        <div class= 'col-6'>
+          <%= f.label :no, "No" %>
+          <%= f.text_field :no ,placeholder: "Enter Exam Hall No",class:"form-control" %>
+        </div>
+      </div>
+    </div>
+  <div class="modal-footer">
+    <%= f.submit "Save Exam Hall", class:"btn btn-secondary" %>
+    <button type="button" class="btn btn-link text-gray-600 ms-auto" data-bs-dismiss="modal">Close</button>
+  </div>
+  <% end %>
+  

@@ -1,2 +1,3 @@
-<h1>Batches#edit</h1>
-<p>Find me in app/views/batches/edit.html.erb</p>
+<%= render 'shared/modal', title: "Subject : #{@batch.id}", fade_in: true do %>
+  <%= render 'form', batch: @batch %>
+<% end %>

@@ -1,2 +1,4 @@
-<h1>ExamHalls#new</h1>
-<p>Find me in app/views/exam_halls/new.html.erb</p>
+<%= render 'shared/modal', title: "Create New Exam Hall", fade_in: true do %>
+    <%= render 'form', examhall: @examhall%>
+  <% end %>
+  

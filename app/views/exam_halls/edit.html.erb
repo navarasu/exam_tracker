@@ -1,2 +1,3 @@
-<h1>ExamHalls#edit</h1>
-<p>Find me in app/views/exam_halls/edit.html.erb</p>
+<%= render 'shared/modal', title: "Subject : #{@exam_hall.id}", fade_in: true do %>
+  <%= render 'form', exam_hall: @exam_hall %>
+<% end %>

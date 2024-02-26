@@ -1,2 +1,4 @@
-<h1>Departments#new</h1>
-<p>Find me in app/views/departments/new.html.erb</p>
+<%= render 'shared/modal', title: "Create New Department", fade_in: true do %>
+    <%= render 'form', department: @department%>
+  <% end %>
+  
